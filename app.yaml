@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-kustomize-components
+spec:
+  destination:
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: base
+    repoURL: https://github.com/sonnguyenHT/kustomize
+    targetRevision: main
+
+    # This!
+    kustomize:
+      components:
+        - ./overlays/prod  # relative to the kustomization.yaml (`source.path`).
